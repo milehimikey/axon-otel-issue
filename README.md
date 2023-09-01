@@ -7,16 +7,18 @@ This example illustrates a class cast exception when using Axon 4.8.2 with `axon
 When running this app it will fail with the following exception:
 
 ```
-Caused by: java.lang.ClassCastException: class io.opentelemetry.sdk.trace.TracerSdkProvider cannot be cast to class io.opentelemetry.api.trace.TracerProvider (io.opentelemetry.sdk.trace.TracerSdkProvider and io.opentelemetry.api.trace.TracerProvider are in unnamed module of loader 'app')
-    at org.axonframework.tracing.opentelemetry.OpenTelemetrySpanFactory.<init>(OpenTelemetrySpanFactory.java:38) ~[axon-tracing-opentelemetry-4.8.2.jar:4.8.2]
-    at org.axonframework.tracing.opentelemetry.OpenTelemetryAutoConfiguration.openTelemetrySpanFactory(OpenTelemetryAutoConfiguration.java:37) ~[axon-tracing-opentelemetry-4.8.2.jar:4.8.2]
-    at org.axonframework.tracing.opentelemetry.OpenTelemetryAutoConfiguration$$EnhancerBySpringCGLIB$$b0f0b0e8.CGLIB$openTelemetrySpanFactory$0(<generated>) ~[axon-tracing-opentelemetry-4.8.2.jar:4.8.2]
-    at org.axonframework.tracing.opentelemetry.OpenTelemetryAutoConfiguration$$EnhancerBySpringCGLIB$$b0f0b0e8$$FastClassBySpringCGLIB$$e0f0b0e5.invoke(<generated>) ~[axon-tracing-opentelemetry-4.8.2.jar:4.8.2]
-    at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.3.9.jar:5.3.9]
-    at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.3.9.jar:5.3.9]
-    at org.axonframework.tracing.opentelemetry.OpenTelemetryAutoConfiguration$$EnhancerBySpringCGLIB$$b0f0b0e8.openTelemetrySpanFactory(<generated>) ~[axon-tracing-opentelemetry-4.8.2.jar:4.8.2]
-    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-    at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78) ~[na:na]
-    at java.base/j
+Caused by: java.lang.ClassCastException: class org.axonframework.tracing.opentelemetry.OpenTelemetrySpanFactory cannot be cast to class org.axonframework.tracing.SpanFactory (org.axonframework.tracing.opentelemetry.OpenTelemetrySpanFactory is in unnamed module of loader 'app'; org.axonframework.tracing.SpanFactory is in unnamed module of loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader @46cde206)
+	at java.base/java.util.Collections$SingletonList.forEach(Collections.java:4966) ~[na:na]
+	at org.axonframework.tracing.MultiSpanFactory.registerSpanAttributeProvider(MultiSpanFactory.java:100) ~[axon-messaging-4.8.1.jar:4.8.1]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.axonframework.springboot.autoconfig.AxonTracingAutoConfiguration.lambda$null$0(AxonTracingAutoConfiguration.java:76) ~[axon-spring-boot-autoconfigure-4.8.1.jar:4.8.1]
+	at org.axonframework.config.DefaultConfigurer.lambda$invokeInitHandlers$48(DefaultConfigurer.java:819) ~[axon-configuration-4.8.1.jar:4.8.1]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.axonframework.config.DefaultConfigurer.invokeInitHandlers(DefaultConfigurer.java:819) ~[axon-configuration-4.8.1.jar:4.8.1]
+	at org.axonframework.config.DefaultConfigurer.buildConfiguration(DefaultConfigurer.java:780) ~[axon-configuration-4.8.1.jar:4.8.1]
+	at org.axonframework.spring.config.SpringAxonConfiguration.getObject(SpringAxonConfiguration.java:64) ~[axon-spring-4.8.1.jar:4.8.1]
+	at org.axonframework.spring.config.SpringAxonConfiguration.getObject(SpringAxonConfiguration.java:41) ~[axon-spring-4.8.1.jar:4.8.1]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:148) ~[spring-beans-6.0.11.jar:6.0.11]
+	... 48 common frames omitted
 ```
 
